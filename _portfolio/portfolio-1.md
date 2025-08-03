@@ -1,6 +1,6 @@
 ---
-title: "Microsoft Research India PhD Fellow by MSRI India"
-excerpt: "Received Microsoft research India PhD fellowship for the year 2025.  <br/><br/><br/><img src='/images/msri.JPG'>"
+title: "The 63rd Annual Meeting of the Association for Computational Linguistics, Vienna, Austria"
+excerpt: "Presented our work at ACL 2025.  <br/><br/><br/><img src='/images/ACL.png'>"
 collection: portfolio
 ---
 
