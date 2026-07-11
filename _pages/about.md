@@ -8,64 +8,152 @@ redirect_from:
 ---
 
 <style>
-  /* Base Container Styling */
+  /* Cosmic Background & Base Styling */
+  body {
+    background: radial-gradient(ellipse at bottom, #1b2735 0%, #090a0f 100%);
+    color: #e6edf3;
+    margin: 0;
+    overflow-x: hidden;
+  }
+
   .about-container {
     font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
     line-height: 1.7;
-    color: #333;
+    position: relative;
+    z-index: 1;
+    padding: 2em;
+    max-width: 800px;
+    margin: 0 auto;
+  }
+
+  /* Animated Planets & Space Elements */
+  .space-bg {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    z-index: 0;
+    pointer-events: none;
+    overflow: hidden;
+  }
+
+  .planet {
+    position: absolute;
+    border-radius: 50%;
+    box-shadow: inset -15px -15px 40px rgba(0,0,0,0.5), 0 0 20px rgba(255,255,255,0.1);
+  }
+
+  .planet-jupiter {
+    width: 120px;
+    height: 120px;
+    top: 15%;
+    right: 10%;
+    background: linear-gradient(145deg, #c3a171, #8b5a2b, #d9b88f);
+    animation: float 25s ease-in-out infinite;
+  }
+
+  /* Orbiting Ring for Jupiter-like planet */
+  .planet-jupiter::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 200px;
+    height: 60px;
+    border: 8px solid rgba(200, 180, 150, 0.4);
+    border-radius: 50%;
+    transform: translate(-50%, -50%) rotate(20deg);
+    box-shadow: 0 0 15px rgba(200, 180, 150, 0.2);
+  }
+
+  .planet-mars {
+    width: 60px;
+    height: 60px;
+    bottom: 20%;
+    left: 5%;
+    background: radial-gradient(circle at 30% 30%, #e74c3c, #96281b);
+    animation: float 18s ease-in-out infinite reverse;
+  }
+
+  .planet-moon {
+    width: 30px;
+    height: 30px;
+    top: 50%;
+    right: 25%;
+    background: radial-gradient(circle at 30% 30%, #bdc3c7, #7f8c8d);
+    animation: orbit 20s linear infinite;
+  }
+
+  /* Keyframes for Space Animations */
+  @keyframes float {
+    0%, 100% { transform: translateY(0px) rotate(0deg); }
+    50% { transform: translateY(-40px) rotate(5deg); }
+  }
+
+  @keyframes orbit {
+    0% { transform: rotate(0deg) translateX(100px) rotate(0deg); }
+    100% { transform: rotate(360deg) translateX(100px) rotate(-360deg); }
   }
 
   /* Typing Effect Intro */
   .typing-container {
     font-size: 1.15em;
-    font-weight: 500;
+    font-weight: 400;
     margin-bottom: 2.5em;
-    min-height: 4em;
-    color: #2c3e50;
+    min-height: 5em;
+    color: #c9d1d9;
+    text-shadow: 0 2px 4px rgba(0,0,0,0.5);
   }
   .cursor {
     display: inline-block;
     width: 3px;
-    background-color: #3498db;
+    background-color: #58a6ff;
     animation: blink 1s step-end infinite;
   }
   @keyframes blink { 50% { opacity: 0; } }
 
-  /* Interactive Cards */
+  /* Glassmorphism Interactive Cards */
   .interactive-section {
     opacity: 0;
     transform: translateY(20px);
     transition: opacity 0.6s ease-out, transform 0.6s ease-out, box-shadow 0.3s ease;
-    margin-bottom: 2em;
-    padding: 1.8em;
-    border-radius: 12px;
-    background: #ffffff;
-    border: 1px solid #e1e8ed;
-    box-shadow: 0 4px 6px rgba(0,0,0,0.02);
+    margin-bottom: 2.5em;
+    padding: 2em;
+    border-radius: 16px;
+    /* Glass effect */
+    background: rgba(255, 255, 255, 0.05);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.3);
   }
   .interactive-section.visible {
     opacity: 1;
     transform: translateY(0);
   }
   .interactive-section:hover {
-    transform: translateY(-3px);
-    box-shadow: 0 10px 20px rgba(0,0,0,0.08);
+    transform: translateY(-5px);
+    box-shadow: 0 12px 40px 0 rgba(0, 0, 0, 0.5);
+    border: 1px solid rgba(88, 166, 255, 0.3);
   }
 
   /* Headings & Links */
   .interactive-section h3 {
     margin-top: 0;
-    color: #2c3e50;
-    border-bottom: 2px solid #3498db;
+    color: #ffffff;
+    border-bottom: 2px solid #58a6ff;
     display: inline-block;
-    padding-bottom: 4px;
-    margin-bottom: 1em;
+    padding-bottom: 6px;
+    margin-bottom: 1.2em;
+    letter-spacing: 0.5px;
   }
   a.custom-link {
-    color: #3498db;
+    color: #58a6ff;
     text-decoration: none;
     font-weight: 600;
     position: relative;
+    transition: color 0.3s;
   }
   a.custom-link::after {
     content: '';
@@ -75,9 +163,12 @@ redirect_from:
     height: 2px;
     bottom: -2px;
     left: 0;
-    background-color: #3498db;
+    background-color: #58a6ff;
     transform-origin: bottom right;
     transition: transform 0.3s ease-out;
+  }
+  a.custom-link:hover {
+    color: #79c0ff;
   }
   a.custom-link:hover::after {
     transform: scaleX(1);
@@ -86,13 +177,14 @@ redirect_from:
 
   /* Academic Journey Timeline */
   .timeline {
-    border-left: 3px solid #3498db;
-    padding-left: 20px;
-    margin: 10px 0 10px 10px;
+    border-left: 2px solid rgba(88, 166, 255, 0.4);
+    padding-left: 25px;
+    margin: 15px 0 15px 15px;
   }
   .timeline-item {
     position: relative;
-    margin-bottom: 25px;
+    margin-bottom: 30px;
+    color: #c9d1d9;
   }
   .timeline-item:last-child {
     margin-bottom: 0;
@@ -100,31 +192,44 @@ redirect_from:
   .timeline-item::before {
     content: '';
     position: absolute;
-    left: -29px;
+    left: -32px;
     top: 6px;
-    width: 12px;
-    height: 12px;
-    background: #ffffff;
-    border: 3px solid #3498db;
+    width: 10px;
+    height: 10px;
+    background: #090a0f;
+    border: 2px solid #58a6ff;
     border-radius: 50%;
-    transition: background 0.3s, transform 0.3s;
+    transition: background 0.3s, transform 0.3s, box-shadow 0.3s;
   }
   .timeline-item:hover::before {
-    background: #3498db;
-    transform: scale(1.3);
+    background: #58a6ff;
+    transform: scale(1.4);
+    box-shadow: 0 0 10px #58a6ff;
   }
-  
+  strong {
+    color: #ffffff;
+  }
+
   /* Flag Counter Image Hover */
   .flag-counter-wrapper img {
     border-radius: 8px;
-    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+    background: rgba(255,255,255,0.9);
+    padding: 5px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.4);
     transition: transform 0.3s ease, box-shadow 0.3s ease;
   }
   .flag-counter-wrapper img:hover {
     transform: scale(1.05);
-    box-shadow: 0 8px 15px rgba(0,0,0,0.15);
+    box-shadow: 0 8px 25px rgba(88, 166, 255, 0.3);
   }
 </style>
+
+<!-- Background Animation Layer -->
+<div class="space-bg">
+  <div class="planet planet-jupiter"></div>
+  <div class="planet planet-mars"></div>
+  <div class="planet planet-moon"></div>
+</div>
 
 <div class="about-container">
   
@@ -200,7 +305,7 @@ redirect_from:
           entry.target.classList.add('visible');
         }
       });
-    }, { threshold: 0.15 }); // Triggers when 15% of the element is visible
+    }, { threshold: 0.15 }); 
 
     document.querySelectorAll('.interactive-section').forEach((section) => {
       observer.observe(section);
